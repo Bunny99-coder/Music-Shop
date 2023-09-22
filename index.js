@@ -10,7 +10,7 @@ require("./config/db");
 
 app.use(
   cors({
-    origin: "https://music-shop-tofik.vercel.app/",
+    origin: "*",
     credentials: true,
   })
 );
