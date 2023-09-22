@@ -10,8 +10,8 @@ require("./config/db");
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    credentials: true
+    origin: "https://music-shop-tofik.vercel.app/",
+    credentials: true,
   })
 );
 
@@ -25,7 +25,7 @@ app.use((error, req, res, next) => {
   error.status = error.status || "error";
   return res.status(error.statusCode).json({
     status: error.status,
-    message: error.message
+    message: error.message,
   });
 });
 
