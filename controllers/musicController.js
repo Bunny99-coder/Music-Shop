@@ -10,10 +10,10 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
-  }
+  },
 });
 const upload = multer({
-  storage: storage
+  storage: storage,
 }).single("file");
 
 // * CRUD OPERATION
@@ -30,10 +30,10 @@ const CreateMusic = async (req, res, next) => {
           const newMusic = new Music({
             title: title,
             artist: artist,
-            fileName: req.file.filename
+            fileName: req.file.filename,
           });
           await newMusic.save();
-          res.redirect("http://localhost:3000/");
+          res.redirect("https://music-shop-tofik.vercel.app/");
         } catch (error) {
           res.status(500).send("Error saving data to the database");
         }
@@ -47,7 +47,7 @@ const GetAllMusic = async (req, res, next) => {
     const musics = await Music.find().exec();
     return res.status(200).json({
       status: "success",
-      value: musics
+      value: musics,
     });
   } catch (e) {
     const err = new Error("unable to fetch data");
@@ -67,7 +67,7 @@ const DeleteMusic = async (req, res, next) => {
 
       return res.status(200).json({
         status: "success",
-        value: []
+        value: [],
       });
     }
   } catch (e) {
@@ -83,7 +83,7 @@ const UpdateMusic = async (req, res, next) => {
     if (!title || !artist) {
       return res.status(400).json({
         status: "error",
-        message: "Missing required fields (title, artist, fileAddress)."
+        message: "Missing required fields (title, artist, fileAddress).",
       });
     }
 
@@ -92,7 +92,7 @@ const UpdateMusic = async (req, res, next) => {
       .catch((err) => console.log(err));
     return res.status(200).json({
       status: "success",
-      value: updatedMusic
+      value: updatedMusic,
     });
   } catch (e) {
     const err = new Error("Unable to update music data.");
@@ -121,5 +121,5 @@ module.exports = {
   GetAllMusic,
   DeleteMusic,
   UpdateMusic,
-  DownloadMusic
+  DownloadMusic,
 };
